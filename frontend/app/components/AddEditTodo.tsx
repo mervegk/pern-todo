@@ -32,7 +32,7 @@ export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
 
     form.reset();
     setTimeout(close, 600);
-    //location.reload();
+    location.reload();
   }
 
   return (
