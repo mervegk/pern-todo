@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { PiTrash, PiNotePencil, PiPlusCircle } from "react-icons/pi";
 import { Todo } from '../types/todo'
 import { getTodos } from '../api/todo';

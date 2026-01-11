@@ -1,5 +1,4 @@
 "use client"
-import React, { useEffect, useState } from 'react'
 import { PiXCircle } from "react-icons/pi";
 import { deleteTodo } from '../api/todo';
 
