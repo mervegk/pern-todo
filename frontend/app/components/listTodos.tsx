@@ -41,15 +41,15 @@ export default function ListTodos() {
               <div>
                 {i.description}
               </div>
-              <div className='justify-self-end grid grid-cols-2 items-center gap-1'>
+              <div className='justify-self-end grid grid-cols-2 items-center gap-1 md:text-xl'>
                 <button onClick={() => {
                   setShowEdit(prev => !prev);
                   setSelectedTodoId(i.todo_id)
-                }} className='cursor-pointer'><PiNotePencil /></button>
+                }} className='text-blue-500 cursor-pointer'><PiNotePencil /></button>
                 <button onClick={() => {
                   setDelete(prev => !prev);
                   setSelectedTodoId(i.todo_id)
-                }} className='cursor-pointer'><PiTrash /></button>
+                }} className='text-red-500 cursor-pointer'><PiTrash /></button>
               </div>
             </li>
           ))
