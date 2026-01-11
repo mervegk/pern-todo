@@ -37,7 +37,7 @@ export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
 
   return (
     <div className='absolute h-full w-full bg-black/20 dark:bg-black/50 flex items-center justify-center top-0 left-0'>
-      <div className='shadow-lg rounded-lg border-2 bg-white dark:border-gray-700 dark:bg-gray-500 md:text-xl min-w-xl'>
+      <div className='shadow-lg rounded-lg border-2 bg-white dark:border-gray-700 dark:bg-gray-500 md:text-xl sm:min-w-xl'>
         <div className='flex w-full items-center justify-end p-2'>
           <button onClick={close} className='cursor-pointer'><PiXCircle /></button>
         </div>

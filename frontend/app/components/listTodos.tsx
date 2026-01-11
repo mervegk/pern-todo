@@ -27,7 +27,7 @@ export default function ListTodos() {
   }, [])
 
   return (
-    <section className='container mx-auto h-full flex flex-col justify-center'>
+    <section className='container mx-auto h-full flex flex-col justify-center max-sm:px-2'>
       <h1 className='text-2xl lg:text-5xl text-center mb-4'>TODO LIST</h1>
       <div className='mb-4 flex self-end'>
         <button onClick={() => setShowAdd(prev => !prev)} className='flex items center justify-center gap-1 text-2xl cursor-pointer hover:text-yellow-500 transition-colors duration-200'><PiPlusCircle /><span className='text-lg'>Add Todo</span></button>
