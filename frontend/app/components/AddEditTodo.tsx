@@ -10,8 +10,6 @@ type AddTodoProps = {
 }
 
 export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
-  console.log(id);
-
 
   const addTodo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
