@@ -28,14 +28,15 @@ export default function ListTodos() {
 
   return (
     <section className='container mx-auto h-full flex flex-col justify-center'>
+      <h1 className='text-2xl lg:text-5xl text-center mb-4'>TODO LIST</h1>
       <div className='mb-4 flex self-end'>
-        <button onClick={() => setShowAdd(prev => !prev)} className='text-3xl cursor-pointer'><PiPlusCircle /></button>
+        <button onClick={() => setShowAdd(prev => !prev)} className='flex items center justify-center gap-1 text-2xl cursor-pointer hover:text-yellow-500 transition-colors duration-200'><PiPlusCircle /><span className='text-lg'>Add Todo</span></button>
         {showAdd && <AddEditTodo close={() => setShowAdd(false)} />}
       </div>
       <ul className='w-full grid grid-cols-1 gap-4'>
         {
           todos.map((i, index) => (
-            <li key={i.todo_id} className='grid grid-cols-[10%_70%_20%] items-center w-full p-4 border-2 border-white rounded-lg'>
+            <li key={i.todo_id} className='grid grid-cols-[10%_70%_20%] items-center w-full p-4 border-2 dark:border-white rounded-lg'>
               <div className='mr-2'>{index + 1}</div>
               <div>
                 {i.description}
