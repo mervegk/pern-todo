@@ -3,12 +3,16 @@ import React, { useState, useEffect } from 'react'
 import { PiTrash, PiNotePencil, PiPlusCircle } from "react-icons/pi";
 import { Todo } from '../types/todo'
 import { getTodos } from '../api/todo';
-import AddTodo from './addTodo';
+import AddEditTodo from './AddEditTodo';
+import DeleteTodo from './DeleteTodo';
 
 
 export default function ListTodos() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [showAdd, setShowAdd] = useState<boolean>(false)
+  const [showAdd, setShowAdd] = useState<boolean>(false);
+  const [showEdit, setShowEdit] = useState<boolean>(false);
+  const [showDelete, setDelete] = useState<boolean>(false);
+  const [selectedTodoId, setSelectedTodoId] = useState<number | null>(null);
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -23,11 +27,10 @@ export default function ListTodos() {
   }, [])
 
   return (
-    <section className='container mx-auto h-full flex flex-col justify-center relative'>
+    <section className='container mx-auto h-full flex flex-col justify-center'>
       <div className='mb-4 flex self-end'>
         <button onClick={() => setShowAdd(prev => !prev)} className='text-3xl cursor-pointer'><PiPlusCircle /></button>
-        {showAdd && <AddTodo close={() => setShowAdd(false)} />}
-
+        {showAdd && <AddEditTodo close={() => setShowAdd(false)} />}
       </div>
       <ul className='w-full grid grid-cols-1 gap-4'>
         {
@@ -38,13 +41,21 @@ export default function ListTodos() {
                 {i.description}
               </div>
               <div className='justify-self-end grid grid-cols-2 items-center gap-1'>
-                <button className='cursor-pointer'><PiNotePencil /></button>
-                <button className='cursor-pointer'><PiTrash /></button>
+                <button onClick={() => {
+                  setShowEdit(prev => !prev);
+                  setSelectedTodoId(i.todo_id)
+                }} className='cursor-pointer'><PiNotePencil /></button>
+                <button onClick={() => {
+                  setDelete(prev => !prev);
+                  setSelectedTodoId(i.todo_id)
+                }} className='cursor-pointer'><PiTrash /></button>
               </div>
             </li>
           ))
         }
       </ul>
+      {(selectedTodoId && showDelete) && <DeleteTodo close={() => setDelete(false)} todo_id={selectedTodoId} />}
+      {(selectedTodoId && showEdit) && <AddEditTodo close={() => setShowEdit(false)} isEdit id={selectedTodoId} />}
     </section>
   )
 }

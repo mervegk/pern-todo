@@ -1,4 +1,4 @@
-import ListTodos from "./components/listTodos";
+import ListTodos from "./components/ListTodos";
 
 export default function Home() {
   return (

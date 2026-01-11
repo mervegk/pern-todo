@@ -1,5 +1,12 @@
 import axios from "axios";
+import { Todo } from "../types/todo";
 
-export const getTodos = async () => axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/todos`).then(res => res.data);
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL + "/todos";
 
-export const addTodos = async (description: string) => axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/todos`, { description: description }).then(res => res.data);
+export const getTodos = async () => axios.get(baseURL).then(res => res.data);
+
+export const addTodos = async (description: string) => axios.post(baseURL, { description: description }).then(res => res.data);
+
+export const updateTodos = async (todo_id: number, description: string) => axios.put(`${baseURL}/${todo_id}`, { description: description }).then(res => res.data);
+
+export const deleteTodo = async (id: number) => axios.delete(`${baseURL}/${id}`)
