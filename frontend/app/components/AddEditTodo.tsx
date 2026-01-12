@@ -2,14 +2,16 @@
 import React from 'react'
 import { PiXCircle } from "react-icons/pi";
 import { addTodos, updateTodos } from '../api/todo';
+import { Todo } from '../types/todo';
 
 type AddTodoProps = {
   close: () => void,
   isEdit?: boolean,
-  id?: number
+  todo?: Todo
 }
 
-export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
+export default function AddEditTodo({ close, isEdit, todo }: AddTodoProps) {
+
 
   const addTodo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -21,7 +23,7 @@ export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
 
     try {
       if (isEdit) {
-        await updateTodos(id!, description);
+        await updateTodos(todo?.todo_id!, description);
       } else {
         await addTodos(description);
       }
@@ -42,7 +44,10 @@ export default function AddEditTodo({ close, isEdit, id }: AddTodoProps) {
           <button onClick={close} className='cursor-pointer'><PiXCircle /></button>
         </div>
         <form className='grid grid-cols-1 gap-4 p-4' onSubmit={addTodo}>
-          <input name='description' type="text" className='border-2 dark:border-white rounded-lg py-1 px-2 focus:border-blue-700 focus:outline-none text-lg' placeholder='description' />
+          <input name='description' type="text" className='border-2 dark:border-white rounded-lg py-1 px-2 focus:border-blue-700 focus:outline-none text-lg'
+            placeholder='description'
+            {...(isEdit && { defaultValue: todo?.description })}
+          />
           <button type='submit' className='justify-self-end py-1 px-3 bg-blue-700 text-white text-center rounded-lg text-base'> {isEdit ? 'Update' : 'Add'} </button>
         </form>
       </div>

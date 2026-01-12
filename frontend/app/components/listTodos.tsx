@@ -12,7 +12,10 @@ export default function ListTodos() {
   const [showAdd, setShowAdd] = useState<boolean>(false);
   const [showEdit, setShowEdit] = useState<boolean>(false);
   const [showDelete, setDelete] = useState<boolean>(false);
-  const [selectedTodoId, setSelectedTodoId] = useState<number | null>(null);
+  const [selectedTodo, setSelectedTodo] = useState<Todo>();
+
+  console.log('List Todo Todo: ', selectedTodo);
+
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -44,19 +47,19 @@ export default function ListTodos() {
               <div className='justify-self-end grid grid-cols-2 items-center gap-1 md:text-xl'>
                 <button onClick={() => {
                   setShowEdit(prev => !prev);
-                  setSelectedTodoId(i.todo_id)
+                  setSelectedTodo(i)
                 }} className='text-blue-500 cursor-pointer'><PiNotePencil /></button>
                 <button onClick={() => {
                   setDelete(prev => !prev);
-                  setSelectedTodoId(i.todo_id)
+                  setSelectedTodo(i)
                 }} className='text-red-500 cursor-pointer'><PiTrash /></button>
               </div>
             </li>
           ))
         }
       </ul>
-      {(selectedTodoId && showDelete) && <DeleteTodo close={() => setDelete(false)} todo_id={selectedTodoId} />}
-      {(selectedTodoId && showEdit) && <AddEditTodo close={() => setShowEdit(false)} isEdit id={selectedTodoId} />}
+      {(selectedTodo && showDelete) && <DeleteTodo close={() => setDelete(false)} todo_id={selectedTodo.todo_id} />}
+      {(selectedTodo && showEdit) && <AddEditTodo close={() => setShowEdit(false)} isEdit todo={selectedTodo} />}
     </section>
   )
 }
